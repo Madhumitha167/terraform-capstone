@@ -1,0 +1,12 @@
+version: '2'
+services:
+    app1:
+        container_name: c1
+        image: learnspring2023/myapp
+        ports:
+            - 18080:8080
+    app2:
+        container_name: c2
+        image: learnspring2023/myapp
+        ports:
+            - 28080:8080
