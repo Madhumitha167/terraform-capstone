@@ -61,5 +61,3 @@ jobs:
     - name: Terraform Apply
 
       run: terraform apply -input=false -auto-approve
-          echo Add other actions to build,
-          echo test, and deploy your project.
