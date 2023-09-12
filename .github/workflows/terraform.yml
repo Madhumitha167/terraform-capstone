@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 jobs:
   build:
@@ -58,6 +58,7 @@ jobs:
         id: get_instance_ips
         run: |
            INSTANCE_IPS=$(terraform output -raw webserver_ips)
+           echo "Terraform Output: $INSTANCE_IPS"  # Debug output
            echo "INSTANCE_IPS=$INSTANCE_IPS" >> $GITHUB_ENV
       - name: Run Ansible Playbook
         run: |
