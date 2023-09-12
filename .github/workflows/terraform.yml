@@ -22,8 +22,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASS }}
     - name: Build and Push Docker Image
       run: |
-        docker build -t madhu1607/gactions-helm:latest .
-        docker push madhu1607/gactions-helm:latest
+        docker build -t madhu1607/capstonejava:latest .
+        docker push madhu1607/capstonejava:latest
 
   terraform:
 
