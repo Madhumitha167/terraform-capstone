@@ -89,6 +89,7 @@ resource "aws_route" "madhu_private_subnet_route" {
 
 # creating a security group
 resource "aws_security_group" "madhu_sg" {
+  name = "terr-securitygroup"
   vpc_id = aws_vpc.madhu_vpc.id
   ingress {
     from_port = 22
@@ -123,7 +124,7 @@ resource "aws_security_group" "madhu_sg" {
 }
 
 # Create EC2 instances
-resource "aws_instance" "aws_instances" {
+resource "aws_instance" "web_servers" {
   count = var.instance_count
 
   ami           = var.ami_id 
@@ -136,9 +137,3 @@ resource "aws_instance" "aws_instances" {
   }
 }
 
-#s3 bucket
-
-resource "aws_s3_bucket" "my_s3_bucket" {
-  bucket_prefix = var.s3_prefix
-  acl = var.acl
-}
