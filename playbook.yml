@@ -1,0 +1,24 @@
+- name: Docker
+  hosts: all
+  become: true
+  tasks:
+   - name: updating cache
+     apt:
+       update_cache: yes
+   - name: Installing docker
+     apt: 
+        name: docker.io
+        state: present
+   - name: Enabling docker
+     service:
+        name: docker
+        state: started
+        enabled: true
+   - name: pull my image from dockerhub
+     command: docker pull madhu1607/capstonejava
+   - name: run my image as docker container
+     docker_container:
+       name: mycontainer
+       image: madhu1607/capstonejava
+       state: started
+       ports: 8080:8080  
