@@ -132,7 +132,7 @@ resource "aws_instance" "aws_instances" {
   key_name      = "ssh-terraform-key"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
-    Name = "terr-instance-${count.index + 1}"
+    Name = "webserver-${count.index + 1}"
   }
 }
 
