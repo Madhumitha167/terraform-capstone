@@ -26,9 +26,13 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -input=false -auto-approve
       - name: Terraform output(private)
-        run: terraform output private_ip
+        run: terraform output private_ip1
       - name: Terraform Output(public)
-        run: terraform output public_ip 
+        run: terraform output public_ip1
+      - name: Terraform output(private)
+        run: terraform output private_ip2
+      - name: Terraform Output(public)
+        run: terraform output public_ip2
       - name: Configure SSH Key
         run: |
            mkdir -p ~/.ssh
