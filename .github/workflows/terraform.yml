@@ -27,7 +27,7 @@ jobs:
         run: terraform apply -input=false -auto-approve
       - name: Get Instance IPs
         run: |
-           INSTANCE_IPS=$(terraform output -raw instance_ips)
+           INSTANCE_IPS=$(terraform output)
            echo "$INSTANCE_IPS" 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
