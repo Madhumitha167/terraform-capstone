@@ -11,7 +11,7 @@ variable "vpc_cidr" {
 variable "subnet1_cidr" {
     description = "CIDR range of subnet 1"
     type = string
-    default = "192.168.1.0/27"
+    default = "192.168.1.0/26"
 }
 
 #subnet1 availability zone 
@@ -27,7 +27,7 @@ variable "subnet1_availability_zone" {
 variable "subnet2_cidr" {
     description = "CIDR range of subnet 2"
     type = string
-    default = "192.168.1.32/27"
+    default = "192.168.1.64/26"
 
 }
 
@@ -37,6 +37,23 @@ variable "subnet2_availability_zone" {
     description = "Availability zone for subnet 2 " 
     type = string
     default ="apse1-az2"
+}
+
+#subnet3 cidr
+
+variable "subnet3_cidr" {
+    description = "CIDR range of subnet 2"
+    type = string
+    default = "192.168.1.128/26"
+
+}
+
+#subnet3 availability zone 
+
+variable "subnet3_availability_zone" {
+    description = "Availability zone for subnet 2 " 
+    type = string
+    default ="apse1-az3"
 }
 
 # instance count
