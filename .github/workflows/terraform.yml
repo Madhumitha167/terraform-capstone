@@ -29,29 +29,5 @@ jobs:
         run: terraform output private_ip1
       - name: Terraform output(public ip of 1)
         run: terraform output public_ip1
-      - name: Run Ansible playbook on a specific host
-        run: |
-           public_ip1=$(terraform output public_ip1)
-           echo "$public_ip1"
-           mkdir -p ~/.ssh
-           touch ~/.ssh/key.pem
-           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/key.pem
-           chmod 700 ~/.ssh/key.pem
-           touch inventory
-           echo "server1 ansible_host=$public_ip1 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/key.pem" >> inventory
-           cat inventory
-           ansible-playbook -i inventory playbook.yml
-      - name: Terraform output(private ip of 2)
-        run: terraform output private_ip2
-      - name: Terraform Output(public ip of 2)
-        run: terraform output public_ip2
-      - name: Configure SSH Key
-        run: |
-           mkdir -p ~/.ssh
-           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-           chmod 700 ~/.ssh/id_rsa
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve 
-        if: failure() || success()
-
+      
       
