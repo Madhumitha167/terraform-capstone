@@ -28,7 +28,9 @@ jobs:
       - name: Terraform output(private ip of 1)
         run: terraform output private_ip1
       - name: Terraform Output(public ip of 1)
-        run: terraform output public_ip1
+        run: |
+          public_ip1=$(terraform output public_ip1)
+          echo "PUBLIC_IP1=${public_ip1}" >> $GITHUB_ENV
       - name: Terraform output(private ip of 2)
         run: terraform output private_ip2
       - name: Terraform Output(public ip of 2)
