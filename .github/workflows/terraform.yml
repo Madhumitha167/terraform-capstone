@@ -31,7 +31,7 @@ jobs:
            echo "$INSTANCE_IPS" 
       - name: Set INSTANCE_IPS environment variable
         run: |
-           INSTANCE_IPS=$(terraform output instances_ips)  # Remove leading/trailing whitespace
+           INSTANCE_IPS=$(terraform output instances_ips) 
            echo "$INSTANCE_IPS"
            echo "INSTANCE_IPS_ENV=$INSTANCE_IPS" >> $GITHUB_ENV
   
