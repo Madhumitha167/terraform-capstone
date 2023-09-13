@@ -153,7 +153,7 @@ resource "aws_instance" "web_server1" {
 resource "aws_instance" "web_server2" {
   ami           = var.ami_id 
   instance_type = var.instance_type     
-  subnet_id     = aws_subnet.madhu_subnet2.id
+  subnet_id     = aws_subnet.madhu_subnet3.id
   key_name      = "ssh-terraform-key"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
