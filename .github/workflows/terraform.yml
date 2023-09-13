@@ -43,5 +43,5 @@ jobs:
           done
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
-        if: success || failure()
+        if: failure()
       
