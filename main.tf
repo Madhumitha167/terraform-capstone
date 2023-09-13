@@ -124,39 +124,37 @@ resource "aws_security_group" "madhu_sg" {
 }
 
 # Create EC2 instances
-resource "aws_instance" "web_server_public" {
-  count = 1
+resource "aws_instance" "web_server1" {
   ami           = var.ami_id 
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet1.id
   key_name      = "ssh-terraform-key"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
-    Name = "webserver-1-public"
+    Name = "webserver-public"
   }
 }
-resource "aws_instance" "web_server_private" {
-  count = 1
+resource "aws_instance" "web_server2" {
   ami           = var.ami_id 
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet2.id
   key_name      = "ssh-terraform-key"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
-    Name = "webserver-1-private"
+    Name = "webserver-private"
   }
 }
 
 output "private_ip1" {
-   value = aws_instance.web_server_public.private_ip
+   value = aws_instance.web_server1.private_ip
 }
 output "public_ip1" {
-   value = aws_instance.web_server_public.public_ip
+   value = aws_instance.web_server1.public_ip
 }
 
 output "private_ip2" {
-   value = aws_instance.web_server_private.private_ip
+   value = aws_instance.web_server2.private_ip
 }
 output "public_ip2" {
-   value = aws_instance.web_server_private.public_ip
+   value = aws_instance.web_server2.public_ip
 }
