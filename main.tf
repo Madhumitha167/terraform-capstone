@@ -15,11 +15,21 @@ resource "aws_subnet" "madhu_subnet1" {
     Name = "terr-subnet1"
   }
 }
-# subnet 2(public) change it to private
+
 resource "aws_subnet" "madhu_subnet2" {
   vpc_id = aws_vpc.madhu_vpc.id
   cidr_block = var.subnet2_cidr
   availability_zone_id = var.subnet2_availability_zone
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "terr-subnet1"
+  }
+}
+# subnet 2(public) change it to private
+resource "aws_subnet" "madhu_subnet3" {
+  vpc_id = aws_vpc.madhu_vpc.id
+  cidr_block = var.subnet3_cidr
+  availability_zone_id = var.subnet3_availability_zone
   map_public_ip_on_launch = false
   tags = {
     Name = "terr-subnet2"
