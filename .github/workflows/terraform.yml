@@ -48,6 +48,6 @@ jobs:
            chmod 700 ~/.ssh/id_rsa
       - name: Terraform destroy
         run: terraform destroy -auto-approve 
-        if: failure()
+        if: failure() || success()
 
       
