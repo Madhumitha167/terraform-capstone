@@ -44,7 +44,7 @@ variable "subnet2_availability_zone" {
 variable "instance_count" {
     description = "Number of instances required"
     type = number
-    default = 2
+    default = 1
 }
 
 #instance type 
