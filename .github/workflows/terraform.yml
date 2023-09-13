@@ -29,7 +29,12 @@ jobs:
         run: |
            INSTANCE_IPS=$(terraform output)
            echo "$INSTANCE_IPS" 
-           echo "INSTANCE_IPS=$INSTANCE_IPS" >> $GITHUB_ENV 
+      - name: Set INSTANCE_IPS environment variable
+        run: |
+           INSTANCE_IPS=$(terraform output | sed 's/^\s*//;s/\s*$//')  # Remove leading/trailing whitespace
+           echo "$INSTANCE_IPS"
+           echo "INSTANCE_IPS=$INSTANCE_IPS" >> $GITHUB_ENV
+  
       - name: Configure SSH Key
         run: |
            mkdir -p ~/.ssh
