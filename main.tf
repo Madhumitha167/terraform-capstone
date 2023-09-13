@@ -2,7 +2,7 @@
 resource "aws_vpc" "madhu_vpc" {
   cidr_block = var.vpc_cidr
   tags = {
-    Name = "madhu-terr-vpc"
+    Name = "Madhu-terr-vpc"
   }
 }
 # subnet 1 (public)
@@ -12,7 +12,7 @@ resource "aws_subnet" "madhu_subnet1" {
   availability_zone_id = var.subnet1_availability_zone
   map_public_ip_on_launch = true
   tags = {
-    Name = "terr-subnet1"
+    Name = "Terr-subnet1"
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "madhu_subnet2" {
   availability_zone_id = var.subnet2_availability_zone
   map_public_ip_on_launch = true
   tags = {
-    Name = "terr-subnet1"
+    Name = "Terr-subnet2"
   }
 }
 # subnet 2(public) change it to private
@@ -32,7 +32,7 @@ resource "aws_subnet" "madhu_subnet3" {
   availability_zone_id = var.subnet3_availability_zone
   map_public_ip_on_launch = false
   tags = {
-    Name = "terr-subnet2"
+    Name = "Terr-subnet3"
   }
 
 }
@@ -41,7 +41,7 @@ resource "aws_subnet" "madhu_subnet3" {
 resource "aws_internet_gateway" "madhu_igw" {
   vpc_id = aws_vpc.madhu_vpc.id
   tags = {
-    Name = "terr-igw"
+    Name = "Terr-igw"
   }
 }
 
@@ -50,14 +50,14 @@ resource "aws_internet_gateway" "madhu_igw" {
 resource "aws_route_table" "madhu_rt_public" {
   vpc_id = aws_vpc.madhu_vpc.id
   tags = {
-    Name = "terr-rt1"
+    Name = "Terr-rt1"
   }
 }
 #route table 2 
 resource "aws_route_table" "madhu_rt_private" {
   vpc_id = aws_vpc.madhu_vpc.id
   tags = {
-    Name = "terr-rt2"
+    Name = "Terr-rt2"
   }
 }
 # Associating route table 1 with subnet 1 
@@ -66,9 +66,16 @@ resource "aws_route_table_association" "madhu_subnet_rt_association1" {
   route_table_id = aws_route_table.madhu_rt_public.id
 }
 
-# Associating route table 2 with subnet 2 
-resource "aws_route_table_association" "madhu_subnet_rt_association2" {
+# Associating route table 1 with subnet 2
+resource "aws_route_table_association" "madhu_subnet_rt_association1" {
   subnet_id = aws_subnet.madhu_subnet2.id
+  route_table_id = aws_route_table.madhu_rt_public.id
+}
+
+
+# Associating route table 2 with subnet 3
+resource "aws_route_table_association" "madhu_subnet_rt_association2" {
+  subnet_id = aws_subnet.madhu_subnet3.id
   route_table_id = aws_route_table.madhu_rt_private.id
 }
 
