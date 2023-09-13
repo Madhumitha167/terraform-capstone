@@ -32,10 +32,10 @@ jobs:
            public_ip1=$(terraform output public_ip1)
            echo "$public_ip1"
            mkdir -p ~/.ssh
-           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-           chmod 700 ~/.ssh/id_rsa
-           echo "server1 ansible_host=$public_ip1 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa" >> inventory
-           ansible -i inventory ping server1
+           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/key.pem
+           chmod 700 ~/.ssh/key.pem
+           echo "server1 ansible_host=$public_ip1 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/key.pem" >> inventory
+           cat inventory
            ansible-playbook -i inventory playbook.yml
       - name: Terraform output(private ip of 2)
         run: terraform output private_ip2
