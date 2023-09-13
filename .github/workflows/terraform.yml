@@ -25,13 +25,13 @@ jobs:
         run: terraform plan
       - name: Terraform Apply
         run: terraform apply -input=false -auto-approve
-      - name: Terraform output(private)
+      - name: Terraform output(private ip of 1)
         run: terraform output private_ip1
-      - name: Terraform Output(public)
+      - name: Terraform Output(public ip of 1)
         run: terraform output public_ip1
-      - name: Terraform output(private)
+      - name: Terraform output(private ip of 2)
         run: terraform output private_ip2
-      - name: Terraform Output(public)
+      - name: Terraform Output(public ip of 2)
         run: terraform output public_ip2
       - name: Configure SSH Key
         run: |
