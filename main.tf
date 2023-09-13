@@ -67,14 +67,13 @@ resource "aws_route_table_association" "madhu_subnet_rt_association1" {
 }
 
 # Associating route table 1 with subnet 2
-resource "aws_route_table_association" "madhu_subnet_rt_association1" {
+resource "aws_route_table_association" "madhu_subnet_rt_association2" {
   subnet_id = aws_subnet.madhu_subnet2.id
   route_table_id = aws_route_table.madhu_rt_public.id
 }
 
-
 # Associating route table 2 with subnet 3
-resource "aws_route_table_association" "madhu_subnet_rt_association2" {
+resource "aws_route_table_association" "madhu_subnet_rt_association3" {
   subnet_id = aws_subnet.madhu_subnet3.id
   route_table_id = aws_route_table.madhu_rt_private.id
 }
