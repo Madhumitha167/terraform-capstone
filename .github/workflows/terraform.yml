@@ -29,7 +29,19 @@ jobs:
         run: |
            INSTANCE_IPS=$(terraform output)
            echo "$INSTANCE_IPS" 
+           echo "INSTANCE_IPS=$INSTANCE_IPS" >> $GITHUB_ENV
+      - name: Configure SSH Key
+        run: |
+           mkdir -p ~/.ssh
+           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+           chmod 777 ~/.ssh/id_rsa
+      - name: Run Ansible Playbook
+        run: |
+          IFS=',' read -ra IP_ARRAY <<< "$INSTANCE_IPS"
+          for IP in "${IP_ARRAY[@]}"; do
+            ansible-playbook -i "$IP," playbook.yml
+          done
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
-        if: failure()
+        if: success || failure()
       
