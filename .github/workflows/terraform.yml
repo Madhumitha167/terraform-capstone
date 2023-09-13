@@ -25,26 +25,17 @@ jobs:
         run: terraform plan
       - name: Terraform Apply
         run: terraform apply -input=false -auto-approve
-      - name: Get Instance IPs
-        run: |
-           INSTANCE_IPS=$(terraform output instance_ips)
-           echo "$INSTANCE_IPS" 
-      - name: Set INSTANCE_IPS environment variable
-        run: |
-           INSTANCE_IPS=$(terraform output public_ip) 
-           echo "$INSTANCE_IPS"
-           echo "INSTANCE_IPS_ENV=$INSTANCE_IPS" >> $GITHUB_ENV
-  
+      - name: Terraform output(private)
+        run: terraform output private_ip
+      - name: Terraform Output(public)
+        run: terraform output public_ip 
       - name: Configure SSH Key
         run: |
            mkdir -p ~/.ssh
            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
            chmod 700 ~/.ssh/id_rsa
-      - name: Run Ansible Playbook
-        run: |
-          IFS=',' read -ra IP_ARRAY <<< "$INSTANCE_IPS"
-          for IP in "${IP_ARRAY[@]}"; do
-            ansible-playbook -i "$IP," playbook.yml
-          done
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve 
+        if: success() || failure()
 
       
