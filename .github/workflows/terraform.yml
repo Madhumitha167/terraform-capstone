@@ -27,13 +27,13 @@ jobs:
         run: terraform apply -input=false -auto-approve
       - name: Get Instance IPs
         run: |
-           INSTANCE_IPS=$(terraform output)
+           INSTANCE_IPS=$(terraform output instance_ips)
            echo "$INSTANCE_IPS" 
       - name: Set INSTANCE_IPS environment variable
         run: |
-           INSTANCE_IPS=$(terraform output instances_ip)  # Remove leading/trailing whitespace
+           INSTANCE_IPS=$(terraform output instances_ips)  # Remove leading/trailing whitespace
            echo "$INSTANCE_IPS"
-           echo "INSTANCE_IPS=$INSTANCE_IPS" >> $GITHUB_ENV
+           echo "INSTANCE_IPS_ENV=$INSTANCE_IPS" >> $GITHUB_ENV
   
       - name: Configure SSH Key
         run: |
