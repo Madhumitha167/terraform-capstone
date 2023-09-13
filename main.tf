@@ -125,7 +125,7 @@ resource "aws_security_group" "madhu_sg" {
 
 # Create EC2 instances
 resource "aws_instance" "web_servers" {
-  count = var.instance_count
+  count = 1
 
   ami           = var.ami_id 
   instance_type = var.instance_type     
