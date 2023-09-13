@@ -137,3 +137,9 @@ resource "aws_instance" "web_servers" {
   }
 }
 
+output "private_ip" {
+   value = aws_instance.web_servers.private_ip
+}
+output "public_ip" {
+   value = aws_instance.web_servers.public_ip
+}
