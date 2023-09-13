@@ -31,4 +31,5 @@ jobs:
            echo "$INSTANCE_IPS" 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
+        if: failure()
       
