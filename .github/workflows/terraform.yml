@@ -25,13 +25,7 @@ jobs:
         run: terraform plan
       - name: Terraform Apply
         run: terraform apply -input=false -auto-approve
-      - name: Configure SSH Key
-        run: |
-           mkdir -p ~/.ssh
-           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-           chmod 777 ~/.ssh/id_rsa
       - name: Get Instance IPs
-        id: get_instance_ips
         run: |
            INSTANCE_IPS=$(terraform output -raw instance_ips)
            echo "$INSTANCE_IPS" 
