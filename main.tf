@@ -173,3 +173,58 @@ output "private_ip2" {
 output "public_ip2" {
    value = aws_instance.web_server2.public_ip
 }
+
+resource "aws_launch_template" "madhu_lt" {
+  name = "terr-launchtemplate"
+  instance_type = "t2.micro"
+  image_id = "ami-091d5f8b86b4cefbe"
+  vpc_security_group_ids = aws_security_group.madhu_sg.id
+
+  block_device_mappings {
+    device_name = "/dev/sda1"
+
+    ebs {
+      volume_size = 8
+      delete_on_termination = true
+    }
+  }
+   
+}
+
+resource "aws_lb_target_group" "madhu-lb-tg" {
+  name     = "terr-lb-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.madhu_vpc.id
+}
+
+#target groups attachment 
+resource "aws_lb_target_group_attachment" "madhu-lb-tg-attachment" {
+  target_group_arn = aws_lb_target_group.madhu-lb-tg.arn
+  target_id        = aws_instance.web_server1.id
+  port             = 80
+}
+
+resource "aws_lb" "terr_classic_lb" {
+  name               = "my-classic-lb"
+  internal           = false
+  enable_deletion_protection = false 
+  subnets = [aws_subnet.madhu_subnet2.id, aws_subnet.madhu_subnet1.id]
+}
+
+ 
+resource "aws_lb_listener" "terr_lb_listener" {
+  load_balancer_arn = aws_lb.terr_classic_lb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.madhu-lb-tg.arn
+  }
+}
+
+output "lb_dns_name" {
+  value = aws_lb.terr_classic_lb.dns_name
+}
+
