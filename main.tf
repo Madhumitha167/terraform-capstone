@@ -25,7 +25,6 @@ resource "aws_subnet" "madhu_subnet2" {
     Name = "Terr-subnet2"
   }
 }
-# subnet 2(public) change it to private
 resource "aws_subnet" "madhu_subnet3" {
   vpc_id = aws_vpc.madhu_vpc.id
   cidr_block = var.subnet3_cidr
