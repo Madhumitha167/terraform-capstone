@@ -19,7 +19,7 @@ variable "subnet1_cidr" {
 variable "subnet1_availability_zone" {
     description = "Availability zone for subnet 1 " 
     type = string
-    default ="apse1-az1"
+    default ="use1-az1"
 }
 
 #subnet2 cidr
@@ -36,7 +36,7 @@ variable "subnet2_cidr" {
 variable "subnet2_availability_zone" {
     description = "Availability zone for subnet 2 " 
     type = string
-    default ="apse1-az2"
+    default ="use1-az2"
 }
 
 #subnet3 cidr
@@ -53,7 +53,7 @@ variable "subnet3_cidr" {
 variable "subnet3_availability_zone" {
     description = "Availability zone for subnet 2 " 
     type = string
-    default ="apse1-az3"
+    default ="use1-az3"
 }
 
 # instance count
