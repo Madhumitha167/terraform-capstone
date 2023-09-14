@@ -161,16 +161,6 @@ resource "aws_instance" "web_server2" {
   }
 }
 
-resource "aws_instance" "check" {
-  ami           = "ami-091d5f8b86b4cefbe"
-  instance_type = var.instance_type     
-  subnet_id     = aws_subnet.madhu_subnet1.id
-  key_name      = "finalcp"
-  security_groups = [aws_security_group.madhu_sg.id]
-  tags = {
-    Name = "webserver-private"
-  }
-}
 
 output "private_ip1" {
    value = aws_instance.web_server1.private_ip
@@ -217,33 +207,3 @@ resource "aws_lb_target_group_attachment" "madhu-lb-tg-attachment" {
   port             = 80
 }
 
-resource "aws_elb" "CAPSTONE" {
-  name               = "CAPSTONE"
-  internal           = false
-  subnets = [aws_subnet.madhu_subnet1.id, aws_subnet.madhu_subnet2.id]
-  security_groups = [aws_security_group.madhu_sg.id]
-  listener {
-    instance_port     = 8080
-    instance_protocol = "tcp"
-    lb_port           = 8080
-    lb_protocol       = "tcp"
-  }
-  health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
-    target              = "TCP:8080"
-    interval            = 30
-  }
-
-  instances                   = [aws_instance.check.id]
-  cross_zone_load_balancing   = true
-  idle_timeout                = 400
-  connection_draining         = true
-  connection_draining_timeout = 400
-
-
-  tags = {
-    Name = "CAPSTONE"
-  }
-}
