@@ -161,7 +161,6 @@ resource "aws_instance" "web_server2" {
   }
 }
 
-
 output "private_ip1" {
    value = aws_instance.web_server1.private_ip
 }
@@ -174,45 +173,4 @@ output "private_ip2" {
 }
 output "public_ip2" {
    value = aws_instance.web_server2.public_ip
-}
-
-resource "aws_instance" "check" {
-  ami           = "ami-0343c47ec54b3d635"
-  instance_type = var.instance_type     
-  subnet_id     = aws_subnet.madhu_subnet1.id
-  key_name      = "finalcp"
-  security_groups = [aws_security_group.madhu_sg.id]
-  tags = {
-    Name = "webserver-private"
-  }
-}
-
-resource "aws_elb" "CAPSTONE" {
-  name               = "CAPSTONE"
-  internal           = false
-  subnets = [aws_subnet.madhu_subnet1.id, aws_subnet.madhu_subnet2.id]
-  security_groups = [aws_security_group.madhu_sg.id]
-  listener {
-    instance_port     = 8080
-    instance_protocol = "tcp"
-    lb_port           = 8080
-    lb_protocol       = "tcp"
-  }
-  health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
-    target              = "TCP:8080"
-    interval            = 30
-  }
-
-  instances                   = [aws_instance.check.id]
-  cross_zone_load_balancing   = true
-  idle_timeout                = 400
-  connection_draining         = true
-  connection_draining_timeout = 400
-
-  tags = {
-    Name = "CAPSTONE"
-  }
 }
