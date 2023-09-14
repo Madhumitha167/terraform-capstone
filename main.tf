@@ -176,34 +176,43 @@ output "public_ip2" {
    value = aws_instance.web_server2.public_ip
 }
 
-resource "aws_launch_template" "madhu_lt" {
-  name = "terr-launchtemplate"
-  instance_type = "t2.micro"
-  image_id = "ami-091d5f8b86b4cefbe"
-  vpc_security_group_ids = [aws_security_group.madhu_sg.id]
-
-  block_device_mappings {
-    device_name = "/dev/sda1"
-
-    ebs {
-      volume_size = 8
-      delete_on_termination = true
-    }
+resource "aws_instance" "check" {
+  ami           = "	ami-0343c47ec54b3d635"
+  instance_type = var.instance_type     
+  subnet_id     = aws_subnet.madhu_subnet1.id
+  key_name      = "finalcp"
+  security_groups = [aws_security_group.madhu_sg.id]
+  tags = {
+    Name = "webserver-private"
   }
-   
 }
 
-resource "aws_lb_target_group" "madhu-lb-tg" {
-  name     = "terr-lb-tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.madhu_vpc.id
-}
+resource "aws_elb" "CAPSTONE" {
+  name               = "CAPSTONE"
+  internal           = false
+  subnets = [aws_subnet.madhu_subnet1.id, aws_subnet.madhu_subnet2.id]
+  security_groups = [aws_security_group.madhu_sg.id]
+  listener {
+    instance_port     = 8080
+    instance_protocol = "tcp"
+    lb_port           = 8080
+    lb_protocol       = "tcp"
+  }
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    target              = "TCP:8080"
+    interval            = 30
+  }
 
-#target groups attachment 
-resource "aws_lb_target_group_attachment" "madhu-lb-tg-attachment" {
-  target_group_arn = aws_lb_target_group.madhu-lb-tg.arn
-  target_id        = aws_instance.web_server1.id
-  port             = 80
-}
+  instances                   = [aws_instance.check.id]
+  cross_zone_load_balancing   = true
+  idle_timeout                = 400
+  connection_draining         = true
+  connection_draining_timeout = 400
 
+  tags = {
+    Name = "CAPSTONE"
+  }
+}
