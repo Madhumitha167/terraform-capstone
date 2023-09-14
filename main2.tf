@@ -1,5 +1,6 @@
 data "aws_security_group" "madhu_sg" {
   name = "terr-securitygroup"  
+}
 
 data "aws_subnet" "madhu_subnet1" {
   id = "aws_subnet.madhu_subnet1.id"  # Replace with your actual subnet ID
