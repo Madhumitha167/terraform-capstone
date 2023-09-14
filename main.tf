@@ -178,7 +178,7 @@ resource "aws_launch_template" "madhu_lt" {
   name = "terr-launchtemplate"
   instance_type = "t2.micro"
   image_id = "ami-091d5f8b86b4cefbe"
-  vpc_security_group_ids = aws_security_group.madhu_sg.id
+  vpc_security_group_ids = [aws_security_group.madhu_sg.id]
 
   block_device_mappings {
     device_name = "/dev/sda1"
