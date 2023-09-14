@@ -77,7 +77,7 @@ variable "instance_type" {
 variable "ami_id" {
     description = "ami id of instance"
     type = string
-    default = "ami-0df7a207adb9748c7"
+    default = "ami-053b0d53c279acc90"
 }
 
 #bucket prefix for s3
