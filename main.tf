@@ -161,7 +161,7 @@ resource "aws_instance" "web_server2" {
 }
 
 resource "aws_instance" "check" {
-  ami           = ami-091d5f8b86b4cefbe
+  ami           = "ami-091d5f8b86b4cefbe"
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet1.id
   key_name      = "ssh-terraform-key"
