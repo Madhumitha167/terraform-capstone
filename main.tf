@@ -15,7 +15,7 @@ resource "aws_subnet" "madhu_subnet1" {
     Name = "Terr-subnet1"
   }
 }
-
+# subnet 2 (public)
 resource "aws_subnet" "madhu_subnet2" {
   vpc_id = aws_vpc.madhu_vpc.id
   cidr_block = var.subnet2_cidr
@@ -25,6 +25,7 @@ resource "aws_subnet" "madhu_subnet2" {
     Name = "Terr-subnet2"
   }
 }
+#subnet3
 resource "aws_subnet" "madhu_subnet3" {
   vpc_id = aws_vpc.madhu_vpc.id
   cidr_block = var.subnet3_cidr
