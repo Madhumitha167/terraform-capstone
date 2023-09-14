@@ -177,7 +177,7 @@ output "public_ip2" {
 }
 
 resource "aws_instance" "check" {
-  ami           = "	ami-0343c47ec54b3d635"
+  ami           = "ami-0343c47ec54b3d635"
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet1.id
   key_name      = "finalcp"
