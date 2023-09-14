@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "ma" ]
+    branches: [ "main" ]
   workflow_dispatch:
 jobs:
   apply:
@@ -24,7 +24,7 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
       - name: Terraform Apply
-        run: terraform apply -input=false -auto-approve -target = main2.tf
+        run: terraform apply -input=false -auto-approve 
       - name: Terraform output(private ip of 1)
         run: terraform output private_ip1
       - name: Terraform output(public ip of 1)
