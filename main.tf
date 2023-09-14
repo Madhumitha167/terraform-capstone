@@ -144,7 +144,7 @@ resource "aws_instance" "web_server1" {
   ami           = var.ami_id 
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet1.id
-  key_name      = "ssh-terraform-key"
+  key_name      = "finalcp"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
     Name = "webserver-public"
@@ -154,7 +154,7 @@ resource "aws_instance" "web_server2" {
   ami           = var.ami_id 
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet3.id
-  key_name      = "ssh-terraform-key"
+  key_name      = "finalcp"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
     Name = "webserver-private"
@@ -165,7 +165,7 @@ resource "aws_instance" "check" {
   ami           = "ami-091d5f8b86b4cefbe"
   instance_type = var.instance_type     
   subnet_id     = aws_subnet.madhu_subnet1.id
-  key_name      = "ssh-terraform-key"
+  key_name      = "finalcp"
   security_groups = [aws_security_group.madhu_sg.id]
   tags = {
     Name = "webserver-private"
